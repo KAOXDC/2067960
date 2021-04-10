@@ -23,3 +23,6 @@ def contacto_view(request):
         formulario = contacto_form()
     
     return render(request, 'contacto.html', locals())
+
+def servicios_view (request):
+    return render(request, "servicios.html", locals())
