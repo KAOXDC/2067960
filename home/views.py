@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
+from .models import Producto, Marca, Categoria
+
 # Create your views here.
 def inicio_view(request):
     msg = 'esta es la pagina de incio'
@@ -26,3 +28,18 @@ def contacto_view(request):
 
 def servicios_view (request):
     return render(request, "servicios.html", locals())
+
+def productos_view (request):
+    productos = Producto.objects.filter(activo=True) # SELECT * FROM 'Producto' WHERE activo=1;
+
+    return render(request, 'productos.html', locals())
+
+def agregar_producto_view (request):
+    if request.method == 'POST':
+        formulario = agregar_producto_form(request.POST, request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('/productos/')
+    else: #GET
+        formulario = agregar_producto_form()
+    return render (request, 'agregar_producto.html', locals())
