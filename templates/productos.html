@@ -13,6 +13,7 @@
                 <th scope="col">marca</th>
                 <th scope="col">estado</th>
                 <th scope="col">Foto</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -24,7 +25,12 @@
                     <td>{{ p.marca }}</td>
                     <td>{{ p.activo }}</td>
                     <td><img src="/media/{{ p.foto }}" alt="" height="80px"></td>
-                </tr>
+                    <td>
+                      <a href="{% url 'editar_producto' id_prod=p.id %}" class="btn btn-warning">Editar</a>
+                      <a href="{% url 'ver_producto' id_prod=p.id %}" class="btn btn-info">Ver</a>
+                      <a href="{% url 'eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                  </tr>
                 {% endfor %}  
             </tbody>
         </table>
