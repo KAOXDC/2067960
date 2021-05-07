@@ -13,3 +13,9 @@ class agregar_producto_form(forms.ModelForm):
         fields = '__all__'
         # fields = ['nombre','descripcion', 'precio', 'foto', 'cantidad' ]
         # exclude = ['foto']
+
+
+class login_form (forms.Form):
+    usuario = forms.CharField(widget = forms.TextInput())
+    clave   = forms.CharField(widget = forms.PasswordInput(render_value = False))
+    

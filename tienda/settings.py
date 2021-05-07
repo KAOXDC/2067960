@@ -26,6 +26,7 @@ SECRET_KEY = 'iiekcb*6pk1+h712btt%rra5@eg)n-faxa$&43m!8nd7mmi1oz'
 DEBUG = True
 
 ALLOWED_HOSTS = ['tiendadedonjose.herokuapp.com']
+#ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -137,10 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
+# STATICFILES_DIRS = [ 
+#     BASE_DIR / "static", # estaticos para trabajar local
 # ]
-STATIC_ROOT = "static"
+STATIC_ROOT = "static" # estaticos para trabajar con heroku
 
 # Servidor de medios
 MEDIA_URL = '/media/'

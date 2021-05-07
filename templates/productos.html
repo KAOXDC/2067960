@@ -3,7 +3,12 @@
 
 {% block contenido %}
     <h1>Lista de productos</h1>
-    <a href="{% url 'agregar_producto' %}" class="btn btn-primary">Agregar un Producto</a>
+    
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+      <a href="{% url 'agregar_producto' %}" class="btn btn-primary">Agregar un Producto</a>
+    {% endif %}
+      
+
         <table class="table">
             <thead>
               <tr>
@@ -26,9 +31,12 @@
                     <td>{{ p.activo }}</td>
                     <td><img src="/media/{{ p.foto }}" alt="" height="80px"></td>
                     <td>
-                      <a href="{% url 'editar_producto' id_prod=p.id %}" class="btn btn-warning">Editar</a>
                       <a href="{% url 'ver_producto' id_prod=p.id %}" class="btn btn-info">Ver</a>
-                      <a href="{% url 'eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a>
+                      
+                      {% if request.user.is_authenticated and request.user.is_superuser %}
+                        <a href="{% url 'editar_producto' id_prod=p.id %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a>    
+                      {% endif %}
                     </td>
                   </tr>
                 {% endfor %}  

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from .models import Producto, Marca, Categoria
 
@@ -69,3 +70,26 @@ def editar_producto_view (request, id_prod):
     else:
         formulario = agregar_producto_form(instance = objeto )
     return render(request, 'agregar_producto.html', locals())
+
+
+def login_view (request):
+    usu = ''
+    cla = ''
+    if request.method == 'POST':
+        formulario = login_form(request.POST)
+        if formulario.is_valid():
+            usu = formulario.cleaned_data['usuario']
+            cla = formulario.cleaned_data['clave']
+            usuario = authenticate(username = usu, password=cla)
+            if usuario is not None and usuario.is_active:
+                login(request, usuario)
+                return redirect('/')
+            else:
+                msj = 'usuario o clave incorrectos'
+    else: #GET
+        formulario = login_form()
+    return render(request, 'login.html', locals()) 
+
+def logout_view (request):
+    logout(request)
+    return redirect('/login/') 
